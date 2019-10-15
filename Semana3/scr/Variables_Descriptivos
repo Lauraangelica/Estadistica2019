@@ -1,0 +1,155 @@
+data()
+
+data(package = .packages(all.available = TRUE))
+
+library(ape)
+library(permute)
+library(vegan)
+library(ade4)
+library(geiger)
+
+data(carnivora)
+data(jackal)
+data(jackal)
+data(BCI)
+data(mite.env)
+data(atlas)
+data(carniherbi49)
+data(corvus)
+data(tortues)
+data(geospiza)
+
+load('Files/carnivora.RData')
+load('Files/jackal.RData')
+load('Files/BCI.RData')
+load('Files/mite.env.RData')
+load('Files/atlas.RData')
+load('Files/corvus.RData')
+load('Files/tortues.RData')
+load('Files/geospiza.RData')
+
+class(geospiza)
+
+str(geospiza)
+
+help("geospiza")
+
+geospiza$geospiza.data
+
+geospiza$geospiza.data[,1]
+
+set.seed(1)
+sex <- c('F', 'M')
+sex
+
+pop1 <- sample(x = sex, size = 50,replace = T,prob = c(0.5,0.5))
+pop1
+
+M <- length(which(pop1 == 'M'))
+M
+
+F <- length(which(pop1 == 'F'))
+F
+
+paste(F,'/',M,sep = '')
+F/M
+
+set.seed(1)
+sex <- c('F', 'M')
+sex
+
+pop2 <- sample(x = sex, size = 50,replace = T,prob = c(0.8,0.2))
+pop2
+
+M <- length(which(pop1 == 'M'))
+M
+
+F <- length(which(pop1 == 'F'))
+F
+
+paste(F,'/',M,sep = '')
+F/M
+
+Ancho<-rnorm(n = 32,mean = 10,sd = 1)
+Ancho
+
+Largo <- rnorm(n = 32,mean = 15,sd = 1)
+Largo
+
+medidas<-cbind(Ancho, Largo)
+medidas
+
+Tabla_medidas <- as.data.frame(cbind(paste('spp',1:32,sep = '_'),medidas))
+Tabla_medidas
+
+colnames(Tabla_medidas) <- c('Individuos', 'Ancho','Largo')
+Tabla_medidas
+
+prp <- Ancho/Largo
+prp
+
+Tabla_medidas_prp <- cbind.data.frame(Tabla_medidas, prp)
+Tabla_medidas_prp
+
+freq<-table(mite.env$Substrate)
+freq
+
+prop.table(freq)
+
+pie(prop.table(freq))
+
+freq
+
+mite.env$Substrate
+
+plot(freq)
+
+atlas$birds
+
+xsp<- apply(atlas$birds,2,sum)
+
+min(xsp)
+
+which.min(xsp)
+
+xsp[which.min(xsp)]
+
+min(xsp)
+
+x <- which.min(xsp)
+
+xsp[x]
+
+max(xsp)
+
+which.max(xsp)
+
+xsp[which.max(xsp)]
+
+plot(as.table(xsp))
+
+tortues$long
+
+table(tortues$long)
+
+min(tortues$long)
+
+max(tortues$long)
+
+range(tortues$long)
+
+bins <- seq(92.5,182.5, 10)
+
+datos<- cut(tortues$long,bins)
+
+freq_long<-table(datos)
+
+transform(freq_long)
+
+transform(freq_long, Relativ= prop.table(Freq), Acum= cumsum(Freq))
+
+hist(tortues$long)
+
+hist(tortues$long, breaks = bins, main = 'Longitudes de caparazón')
+
+
